@@ -2,6 +2,7 @@ package com.tyss.student;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -22,15 +23,17 @@ public class Save {
 			Connection con = DriverManager.getConnection(url, user, password);
 			System.out.println("connection created");
 
-			// step 3 : Create Statement
-			Statement stm = con.createStatement();
-			System.out.println("statement is created");
+			String insert = "INSERT INTO student VALUES(?,?,?,?)";
 
-			String insert = "INSERT INTO student VALUES(1,'Pengi','pengi@gmail.com',8765456)";
+			// step 3 : Create Statement
+			PreparedStatement pstm = con.prepareStatement(insert);
+			pstm.setInt(1, 111);
+			pstm.setString(2, "Penga");
+			pstm.setString(3, "penga@gmail.com");
+			pstm.setLong(4, 8765434567L);
 
 			// step 4 : Execute the query
-			boolean res = stm.execute(insert);
-			System.out.println(res);
+			pstm.execute();
 			System.out.println("record inserted");
 
 			// step 5 : Close the connection
