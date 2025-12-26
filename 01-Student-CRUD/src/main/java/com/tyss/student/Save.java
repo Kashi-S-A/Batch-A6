@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Save {
 
@@ -27,14 +26,14 @@ public class Save {
 
 			// step 3 : Create Statement
 			PreparedStatement pstm = con.prepareStatement(insert);
-			pstm.setInt(1, 111);
+			pstm.setInt(1, 6);
 			pstm.setString(2, "Penga");
 			pstm.setString(3, "penga@gmail.com");
 			pstm.setLong(4, 8765434567L);
 
 			// step 4 : Execute the query
-			pstm.execute();
-			System.out.println("record inserted");
+			int res = pstm.executeUpdate();
+			System.out.println(res + " record/records inserted");
 
 			// step 5 : Close the connection
 			con.close();

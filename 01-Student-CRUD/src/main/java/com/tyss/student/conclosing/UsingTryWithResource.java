@@ -1,12 +1,11 @@
-package com.tyss.student;
+package com.tyss.student.conclosing;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Fetch {
+public class UsingTryWithResource {
 
 	public static void main(String[] args) {
 		String driver = "org.postgresql.Driver";
@@ -15,16 +14,17 @@ public class Fetch {
 
 		try {
 			Class.forName(driver);
+			System.out.println("driver loaded");
 
-			Connection con = DriverManager.getConnection(url);
-			System.out.println("driver loaded and connection created");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 
+		try (Connection con = DriverManager.getConnection(url);)// Resource
+		{
 			Statement stm = con.createStatement();
-			System.out.println("statement is created");
 
 			String fetch = "SECT * FROM student";
-
-//			stm.executeUpdate(fetch);//Exception
 
 			ResultSet rs = stm.executeQuery(fetch);
 
@@ -38,13 +38,8 @@ public class Fetch {
 				System.out.println("====================");
 			}
 
-			con.close();
-
-			System.out.println("record fetched and con closed");
-
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+			System.out.println("record fetched successfully");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

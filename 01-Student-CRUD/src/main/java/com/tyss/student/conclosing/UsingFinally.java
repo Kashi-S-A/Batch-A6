@@ -1,4 +1,4 @@
-package com.tyss.student;
+package com.tyss.student.conclosing;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,18 +6,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Fetch {
+public class UsingFinally {
 
 	public static void main(String[] args) {
 		String driver = "org.postgresql.Driver";
 
-		String url = "jdbc:postgresql://localhost:5432/demo_db?user=postgres&password=root";
+		String url = "jdbc:postgresql://localhost:5432/demo_db?user=postgres&password=roo";
 
+		Connection con = null;
 		try {
 			Class.forName(driver);
+			System.out.println("driver loaded");
 
-			Connection con = DriverManager.getConnection(url);
-			System.out.println("driver loaded and connection created");
+			con = DriverManager.getConnection(url);
+			System.out.println("connection created");
 
 			Statement stm = con.createStatement();
 			System.out.println("statement is created");
@@ -38,14 +40,21 @@ public class Fetch {
 				System.out.println("====================");
 			}
 
-			con.close();
-
-			System.out.println("record fetched and con closed");
+			System.out.println("record fetched successfully");
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+					System.out.println("connection is  closed");
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

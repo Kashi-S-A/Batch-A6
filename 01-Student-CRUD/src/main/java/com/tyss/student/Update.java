@@ -20,15 +20,15 @@ public class Update {
 
 			Statement stm = con.createStatement();
 
-			String update = "UPDATE student SET phone=998877 WHERE sid=1";
+			String update = "UPDATE student SET phone=998877 WHERE name='Penga'";
 
-			boolean res = stm.execute(update);
+//			stm.executeQuery(update);//Exception
 
-			System.out.println(res);
+			int res = stm.executeUpdate(update);
+
+			System.out.println(res + " record/records updated");
 
 			con.close();
-
-			System.out.println("record update and con is closed");
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
