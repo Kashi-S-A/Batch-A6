@@ -1,7 +1,5 @@
 package com.ty.crud;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -9,32 +7,28 @@ import javax.persistence.Persistence;
 import com.ty.entity.Account;
 import com.ty.entity.Bank;
 
-public class Fetch {
+public class FetchByAccount {
 
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
 		EntityManager em = emf.createEntityManager();
 
-		Bank bank = em.find(Bank.class, 1);
+		Account account = em.find(Account.class, 1122L);
 
-		if (bank != null) {
+		if (account != null) {
+			System.out.println("-------Account----------");
+			System.out.println(account.getAccno());
+			System.out.println(account.getName());
+			System.out.println(account.getAmount());
+
+			Bank bank = account.getBank();
 			System.out.println("----------Bank-----------");
 			System.out.println(bank.getBid());
 			System.out.println(bank.getName());
 			System.out.println(bank.getAddress());
 
-			List<Account> accounts = bank.getAccounts();
-			System.out.println("-------Accounts-----------");
-			for (Account account : accounts) {
-				System.out.println(account.getAccno());
-				System.out.println(account.getName());
-				System.out.println(account.getAmount());
-				System.out.println("-----------------");
-			}
-
 		} else {
-			System.out.println("not found");
+			System.out.println("Not found");
 		}
-
 	}
 }

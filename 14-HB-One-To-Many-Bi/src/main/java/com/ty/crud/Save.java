@@ -15,21 +15,33 @@ public class Save {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 
-		Bank bank = new Bank(1, "SBI", "Thane");
+		// New bank and New accounts
+//		Bank bank = new Bank(1, "SBI", "Thane");
+//
+//		Account a1 = new Account(1122, "A", 10000);
+//		Account a2 = new Account(2233, "B", 5000);
+//		Account a3 = new Account(2212, "C", 2000);
+//
+//		a1.setBank(bank);
+//		a2.setBank(bank);
+//		a3.setBank(bank);
+//
+//		et.begin();
+//		em.persist(bank);
+//		em.persist(a1);
+//		em.persist(a2);
+//		em.persist(a3);
+//		et.commit();
 
-		Account a1 = new Account(1122, "A", 10000);
-		Account a2 = new Account(2233, "B", 5000);
-		Account a3 = new Account(2212, "C", 2000);
+		// new account in existing bank
 
-		a1.setBank(bank);
-		a2.setBank(bank);
-		a3.setBank(bank);
+		Bank bank = em.find(Bank.class, 1);
+
+		Account a4 = new Account(8822, "D", 50000);
+		a4.setBank(bank);
 
 		et.begin();
-		em.persist(bank);
-		em.persist(a1);
-		em.persist(a2);
-		em.persist(a3);
+		em.persist(a4);
 		et.commit();
 
 		System.out.println("saved");
