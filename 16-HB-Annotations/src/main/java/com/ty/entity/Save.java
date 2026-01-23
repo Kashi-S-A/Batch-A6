@@ -1,32 +1,27 @@
-package com.ty.crud;
+package com.ty.entity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import com.ty.entity.Car;
-
-public class DeleteCar {
+public class Save {
 
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("dev");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 
-		Car car = em.find(Car.class, 2);
+		User user = new User();
+		user.setName("Pengi");
+		user.setEmail("pengi@gmail.com");
+		user.setPhone(654);
+		user.setPassword("pengi@123");
 
-		if (car != null) {
-			et.begin();
+		et.begin();
+		em.persist(user);
+		et.commit();
 
-			em.remove(car);
-
-			et.commit();
-
-			System.out.println("deleted");
-
-		} else {
-			System.out.println("Not found");
-		}
+		System.out.println("table created");
 	}
 }

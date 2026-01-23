@@ -15,16 +15,15 @@ public class Save {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 
-		Car car = new Car(2, "xyz", 2500000);
+		Car car = new Car(2, "ghjk", 1500000);
 
-		Engine engine = new Engine(22, "D", 750);
+		Engine engine = new Engine(22, "D", 650);
 
 		car.setEngine(engine);
 
 		et.begin();
 
 		em.persist(car);
-		em.persist(engine);
 
 		et.commit();
 
