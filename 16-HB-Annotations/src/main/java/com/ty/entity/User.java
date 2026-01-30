@@ -2,6 +2,7 @@ package com.ty.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +15,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "user_info")
+@Cacheable
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int uid;
 
 	@Column(name = "username")
@@ -36,6 +38,12 @@ public class User {
 
 	@UpdateTimestamp
 	private LocalDateTime updatedDate;
+
+	@Override
+	public String toString() {
+		return "User [uid=" + uid + ", name=" + name + ", email=" + email + ", password=" + password + ", phone="
+				+ phone + ", createdDate=" + createdDate + ", updatedDate=" + updatedDate + "]";
+	}
 
 	public LocalDateTime getCreatedDate() {
 		return createdDate;

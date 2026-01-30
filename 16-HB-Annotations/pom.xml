@@ -17,6 +17,15 @@
     <version>5.6.15.Final</version>
     <scope>compile</scope>
 </dependency>
+
+<!-- Source: https://mvnrepository.com/artifact/org.hibernate/hibernate-ehcache -->
+<dependency>
+    <groupId>org.hibernate</groupId>
+    <artifactId>hibernate-ehcache</artifactId>
+    <version>5.6.15.Final</version>
+    <scope>compile</scope>
+</dependency>
+
   </dependencies>
   
 </project>

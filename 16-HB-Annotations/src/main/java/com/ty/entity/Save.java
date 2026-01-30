@@ -12,15 +12,19 @@ public class Save {
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction et = em.getTransaction();
 
-		User user = new User();
-		user.setName("Pengi");
-		user.setEmail("pengi@gmail.com");
-		user.setPhone(654);
-		user.setPassword("pengi@123");
+		System.out.println(emf);
+		System.out.println(em);
+		System.out.println(et);
 
-		et.begin();
-		em.persist(user);
-		et.commit();
+//		User user = new User();
+//		user.setName("Penga");
+//		user.setEmail("penga@gmail.com");
+//		user.setPhone(567);
+//		user.setPassword("penga@123");
+//
+//		et.begin();
+//		em.persist(user);
+//		et.commit();
 
 		System.out.println("table created");
 	}
