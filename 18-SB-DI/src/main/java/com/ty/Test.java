@@ -11,5 +11,8 @@ public class Test {
 		Employee emp = (Employee) app.getBean("empId");
 		emp.task();
 		emp.display();
+
+		Student student = (Student) app.getBean("studentBean");
+		student.display();
 	}
 }
