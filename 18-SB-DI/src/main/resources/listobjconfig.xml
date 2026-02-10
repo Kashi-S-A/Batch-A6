@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+
+	<bean id="sub1" class="com.ty.listobj.Subject">
+		<property name="id" value="101"></property>
+		<property name="name" value="JAVA"></property>
+	</bean>
+
+	<bean id="sub2" class="com.ty.listobj.Subject">
+		<property name="id" value="102"></property>
+		<property name="name" value="SPRING"></property>
+	</bean>
+
+	<bean id="sub3" class="com.ty.listobj.Subject">
+		<property name="id" value="103"></property>
+		<property name="name" value="Hibernate"></property>
+	</bean>
+
+	<bean id="sub4" class="com.ty.listobj.Subject">
+		<property name="id" value="104"></property>
+		<property name="name" value="SPRING Boot"></property>
+	</bean>
+
+	<bean id="stud" class="com.ty.listobj.Student">
+		<property name="name" value="Penga"></property>
+		<property name="subjects">
+			<list>
+				<ref bean="sub1" />
+				<ref bean="sub2" />
+				<ref bean="sub3" />
+				<ref bean="sub4" />
+			</list>
+		</property>
+	</bean>
+
+
+</beans>

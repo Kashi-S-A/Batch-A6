@@ -4,7 +4,7 @@ public class Car {
 
 	String brand;
 
-	Engine engine;
+	Engine engine;// null, instance of engine
 
 	public void setBrand(String brand) {
 		this.brand = brand;
