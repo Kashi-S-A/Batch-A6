@@ -2,7 +2,7 @@ package com.ty;
 
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Student {
 
 	public void play() {
