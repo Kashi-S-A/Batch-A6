@@ -12,6 +12,10 @@
 		Name : <input type="text" name="un" placeholder="Enter name" required><br>
 		Email : <input type="email" name="ue" placeholder="Enter Email" required><br>
 		Password : <input type="password" name="pwd" placeholder="Enter Pwd" required><br>
+		age	: <input type="number" name="age" placeholder="Enter Age" required><br>
+		address  : <input type="text" name="add" placeholder="Enter Add" required><br>
+		phone : <input type="number" name="ph" placeholder="Enter Phone" required><br>
+		gender : <input type="text" name="gender" placeholder="Enter gender" required><br>
 		<input type="submit" value="Register">
 		
 	</form>
