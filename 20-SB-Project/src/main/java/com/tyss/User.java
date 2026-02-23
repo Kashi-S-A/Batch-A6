@@ -10,6 +10,12 @@ public class User {
 	private long phone;
 	private String gender;
 
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", email=" + email + ", password=" + password + ", age=" + age + ", address="
+				+ address + ", phone=" + phone + ", gender=" + gender + "]";
+	}
+
 	public User() {
 	}
 

@@ -1,3 +1,4 @@
+
 package com.tyss;
 
 import org.springframework.stereotype.Controller;
@@ -5,8 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class TestController {
@@ -18,25 +17,33 @@ public class TestController {
 	}
 
 	@RequestMapping("/reg")
-	public String registerPage() {
-		System.out.println("Register Triggered");
+	public String registerPage(Model model) {
+
+		model.addAttribute("user", new User());
+
 		return "register.jsp";
 	}
 
 	// reading data from view
 
+//	@RequestMapping(value = "/register", method = RequestMethod.POST)
+//	public String register(HttpServletRequest request) {
+//		System.out.println("reading data");
+//		String name = request.getParameter("un");
+//		String email = request.getParameter("ue");
+//		String pwd = request.getParameter("pwd");
+//
+//		System.out.println(name);
+//		System.out.println(email);
+//		System.out.println(pwd);
+//
+//		return "Hello";// view name
+//	}
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String register(HttpServletRequest request) {
-		System.out.println("reading data");
-		String name = request.getParameter("un");
-		String email = request.getParameter("ue");
-		String pwd = request.getParameter("pwd");
-
-		System.out.println(name);
-		System.out.println(email);
-		System.out.println(pwd);
-
-		return "Hello";// view name
+	public String readRegisterDatga(User user) {
+		System.out.println(user);
+		return "test.jsp";
 	}
 
 	// send the data to view so view can display it on the browser.
@@ -53,6 +60,7 @@ public class TestController {
 		model.addAttribute("userData", user);
 		return "display.jsp";
 	}
+
 	@RequestMapping("/mv")
 	public ModelAndView displayData() {
 		System.out.println("API called");
@@ -60,9 +68,9 @@ public class TestController {
 		int age = 33;
 		User user = new User("Mangi", "mangi@gmail.com", "mangi123", 34, "Thane", 3456789, "Female");
 		ModelAndView mv = new ModelAndView("display.jsp");
-		//set the view
+		// set the view
 //		mv.setViewName("display.jsp");
-		//set the model
+		// set the model
 		mv.addObject("personName", name);
 		mv.addObject("personAge", age);
 		mv.addObject("userData", user);
