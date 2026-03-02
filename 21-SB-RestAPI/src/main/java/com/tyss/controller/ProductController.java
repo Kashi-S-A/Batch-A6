@@ -4,6 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -84,6 +89,52 @@ public class ProductController {
 			return "product deleted";
 		}
 		return "Product not found";
+	}
+
+	@GetMapping("/cat")
+	public List<Product> byCategory(@RequestParam(name = "cat") String category) {
+
+//		List<Product> products = productRepository.getProductByCategory(category);
+
+		List<Product> products = productRepository.findByCategory(category);
+
+		return products;
+	}
+
+	@GetMapping("/range")
+	public List<Product> byPriceRange(@RequestParam Double from, @RequestParam Double to) {
+//		return productRepository.getProductByRange(from, to);
+		return productRepository.findByPriceBetween(from, to);
+	}
+
+	@GetMapping("/pagination")
+	public List<Product> byPage(@RequestParam Integer pageNumber) {
+
+		Pageable pageable = PageRequest.of(pageNumber - 1, 10);
+
+		Page<Product> all = productRepository.findAll(pageable);
+
+		List<Product> products = all.toList();
+
+		return products;
+	}
+
+	@GetMapping("/sort")
+	public List<Product> sorting(@RequestParam String sort) {
+
+		List<Product> products = productRepository.findAll(Sort.by(sort).ascending());// by default sorts in ascending
+
+		return products;
+	}
+
+	@GetMapping("/filter")
+	public List<Product> filterProducts(@RequestBody Product product) {
+
+		Example<Product> of = Example.of(product);
+
+		List<Product> products = productRepository.findAll(of);
+
+		return products;
 	}
 
 }
