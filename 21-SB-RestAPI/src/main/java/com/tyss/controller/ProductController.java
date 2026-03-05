@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +38,7 @@ public class ProductController {
 	}
 
 	@GetMapping("/byId")
-	public Product fetchById(@RequestParam Integer pid) {
+	public ResponseEntity<Product> fetchById(@RequestParam Integer pid) {
 
 //		Optional<Product> opt = productRepository.findById(pid);
 //
@@ -47,15 +49,26 @@ public class ProductController {
 ////			return null;
 //			throw new RuntimeException("Product not found");
 //		}
+		
+		Product product = productRepository.findById(pid).orElseThrow(() -> new RuntimeException("Product not found"));
 
-		return productRepository.findById(pid).orElseThrow(() -> new RuntimeException("Product not found"));
+		ResponseEntity<Product> resp = new ResponseEntity<Product>(product, HttpStatus.OK);
+		
+		ResponseEntity<Product> responseEntity = ResponseEntity.status(HttpStatus.OK).body(product);
+		
+		return  resp;
 	}
 
 	@PostMapping("/save")
-	public Product save(@RequestBody Product product) {
+	public ResponseEntity<Product> save(@RequestBody Product product) {
+		
 		Product savedProduct = productRepository.save(product);
+		
+		ResponseEntity<Product> resp = new ResponseEntity<Product>(savedProduct, HttpStatus.CREATED);
+		
+		ResponseEntity<Product> responseEntity = ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
 
-		return savedProduct;
+		return resp;
 	}
 
 	@PutMapping("/update/pid/{pid}")
@@ -135,6 +148,27 @@ public class ProductController {
 		List<Product> products = productRepository.findAll(of);
 
 		return products;
+	}
+
+	@GetMapping(value = "/content", consumes = {
+													"application/json",
+													"application/xml"
+									}, 
+									produces =  {
+											"application/json",
+											"application/xml"
+							}
+	)
+	public Product contentType(@RequestBody Product product) {
+
+		System.out.println(product.getPid());
+		System.out.println(product.getBrand());
+		System.out.println(product.getCategory());
+		System.out.println(product.getDescription());
+		System.out.println(product.getPrice());
+		System.out.println(product.getQuantity());
+
+		return product;
 	}
 
 }
