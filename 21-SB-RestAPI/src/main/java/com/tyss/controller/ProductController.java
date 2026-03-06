@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tyss.entity.Product;
 import com.tyss.repo.ProductRepository;
+import com.tyss.service.ProductService;
 
 @RestController
 @RequestMapping("/product")
@@ -30,6 +32,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private ProductService productService;
 
 	@GetMapping("/all")
 	public List<Product> fetch() {
@@ -73,23 +78,7 @@ public class ProductController {
 
 	@PutMapping("/update/pid/{pid}")
 	public String update(@PathVariable Integer pid, @RequestBody Product product) {
-
-		Optional<Product> opt = productRepository.findById(pid);
-
-		if (opt.isPresent()) {
-			Product dbproduct = opt.get();
-			dbproduct.setBrand(product.getBrand());
-			dbproduct.setCategory(product.getCategory());
-			dbproduct.setDescription(product.getDescription());
-			dbproduct.setPrice(product.getPrice());
-			dbproduct.setQuantity(product.getQuantity());
-
-			productRepository.save(dbproduct);
-
-			return "product updated successfully";
-		}
-
-		return "Product Not found";
+		return productService.updateProduct(pid, product);
 	}
 
 	@DeleteMapping("/delete/{id}")
@@ -170,5 +159,45 @@ public class ProductController {
 
 		return product;
 	}
+	
+	@GetMapping("/exc")
+	public String m1() {
+		
+		System.out.println("got the request");
+		
+//		String s = null;
+//		
+//		System.out.println(s.charAt(10));
+		
+		int a = 10/0;
+		
+		return "Thank you for calling";
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<String> handleException(Exception e) {
+		System.out.println("exception handled in LOCAL");
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+	}
+	
+	@ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<String> handleNullPointerException(NullPointerException exception)
+	{
+		System.out.println("Handled NPE in LOCAL");
+		return new ResponseEntity<String>(exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}	
+	
+	@ExceptionHandler(ArithmeticException.class)
+	public ResponseEntity<String> handleArithmeticException(ArithmeticException exception) {
+		
+		System.out.println("Handled AE in LOCAL");
+		
+		String msg = exception.getMessage();
+		
+		ResponseEntity<String> resp = new ResponseEntity<String>(msg, HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		return resp;
+	}
+	
 
 }
