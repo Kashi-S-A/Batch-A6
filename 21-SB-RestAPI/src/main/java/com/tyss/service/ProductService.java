@@ -9,6 +9,7 @@ import com.tyss.dao.ProductDAO;
 import com.tyss.entity.Product;
 
 @Service
+//@Profile(value = "dev")
 public class ProductService {
 	
 	@Autowired

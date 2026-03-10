@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome</title>
+
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #f4f6f8;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+	max-width: 600px;
+	margin: 40px auto;
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+	overflow: hidden;
+}
+
+.header {
+	background: #4a6cf7;
+	color: white;
+	text-align: center;
+	padding: 30px 20px;
+}
+
+.header h1 {
+	margin: 0;
+	font-size: 28px;
+}
+
+.content {
+	padding: 30px;
+	color: #333;
+	line-height: 1.6;
+	text-align: center;
+}
+
+.content h2 {
+	margin-top: 0;
+}
+
+.button {
+	display: inline-block;
+	margin-top: 20px;
+	padding: 12px 24px;
+	background: #4a6cf7;
+	color: white;
+	text-decoration: none;
+	border-radius: 5px;
+	font-weight: bold;
+}
+
+.footer {
+	text-align: center;
+	font-size: 13px;
+	color: #888;
+	padding: 20px;
+	background: #fafafa;
+}
+
+@media ( max-width :600px) {
+	.container {
+		margin: 20px;
+	}
+}
+</style>
+
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="header">
+			<h1>${app_name}</h1>
+		</div>
+
+		<div class="content">
+			<h2>Welcome, ${username} 🎉</h2>
+
+			<p>
+				We're excited to have you join <strong>${app_name}</strong>. Your
+				account has been successfully created and you're ready to get
+				started.
+			</p>
+
+			<p>Explore the features, customize your profile, and start
+				enjoying the experience we built for you.</p>
+
+			<a href="${app_link}" class="button">Get Started</a>
+		</div>
+
+		<div class="footer">
+			<p>© 2026 ${app_name}. All rights reserved.</p>
+			<p>If you didn’t create this account, please ignore this email.</p>
+		</div>
+
+	</div>
+
+</body>
+</html>
