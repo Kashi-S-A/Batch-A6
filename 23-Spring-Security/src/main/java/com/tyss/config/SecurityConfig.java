@@ -31,8 +31,7 @@ public class SecurityConfig {
 				   .authenticated()
 					)
 			.formLogin(f -> Customizer.withDefaults())
-			.logout(l -> Customizer.withDefaults())
-			;
+			.logout(l -> Customizer.withDefaults());
 
 		return http.build();
 	}
