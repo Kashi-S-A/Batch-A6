@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -58,7 +57,7 @@
             <i class="fa-solid fa-user" data-bs-toggle="dropdown" style="cursor:pointer;"></i>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Logout</a></li>
+                <li><a class="dropdown-item" href="logout">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -68,7 +67,9 @@
 
     <h3>Student Management System</h3>
     <p class="text-muted">Manage Students and Courses</p>
-
+	
+	<p style="color: green">${msg}</p>
+	
     <!-- CARDS -->
     <div class="row justify-content-center mt-4">
 
@@ -100,7 +101,7 @@
                     ${totalCourses != null ? totalCourses : 3}
                 </div>
 
-                <a href="view-course.jsp" class="btn btn-success mt-2">View Courses</a>
+                <a href="view-course" class="btn btn-success mt-2">View Courses</a>
             </div>
         </div>
 
@@ -112,7 +113,7 @@
             <i class="fa-solid fa-plus"></i> Add Student
         </a>
 
-        <a href="add-course.jsp" class="btn btn-success">
+        <a href="add-course" class="btn btn-success">
             <i class="fa-solid fa-plus"></i> Add Course
         </a>
     </div>
@@ -125,22 +126,10 @@
             <div class="card">
                 <h6>Recent Students</h6>
 
-                <c:choose>
-                    <c:when test="${not empty students}">
-                        <c:forEach var="s" items="${students}">
-                            <div class="item">
-                                <i class="fa-solid fa-user me-2"></i>${s.name}
-                            </div>
-                        </c:forEach>
-                    </c:when>
-
-                    <c:otherwise>
                         <div class="item"><i class="fa-solid fa-user me-2"></i>Kashi</div>
                         <div class="item"><i class="fa-solid fa-user me-2"></i>Amit</div>
                         <div class="item"><i class="fa-solid fa-user me-2"></i>Sneha</div>
                         <div class="item"><i class="fa-solid fa-user me-2"></i>Rahul</div>
-                    </c:otherwise>
-                </c:choose>
 
             </div>
         </div>
@@ -150,22 +139,10 @@
             <div class="card">
                 <h6>Recent Courses</h6>
 
-                <c:choose>
-                    <c:when test="${not empty courses}">
-                        <c:forEach var="c" items="${courses}">
-                            <div class="item">
-                                <i class="fa-solid fa-book me-2"></i>${c.name}
-                            </div>
-                        </c:forEach>
-                    </c:when>
-
-                    <c:otherwise>
                         <div class="item"><i class="fa-solid fa-book me-2"></i>Java</div>
                         <div class="item"><i class="fa-solid fa-book me-2"></i>Spring Boot</div>
                         <div class="item"><i class="fa-solid fa-book me-2"></i>React</div>
                         <div class="item"><i class="fa-solid fa-book me-2"></i>Angular</div>
-                    </c:otherwise>
-                </c:choose>
 
             </div>
         </div>

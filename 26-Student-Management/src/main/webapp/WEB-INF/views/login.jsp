@@ -58,8 +58,9 @@
 <body>
     <div class="container">
         <h2>Login</h2>
-        <form action="LoginServlet" method="post">
-            <label for="username">Username:</label>
+        <h3 style="color: navy;">${msg}</h3>
+        <form action="auth" method="post">
+            <label for="username">Email:</label>
             <input type="text" name="username" required/>
 
             <label for="password">Password:</label>
@@ -67,6 +68,8 @@
 
             <input type="submit" value="Login"/>
         </form>
+        
+        <a href="register">Register Here</a>
     </div>
 </body>
 </html>

@@ -57,12 +57,9 @@
 <body>
     <div class="container">
         <h2>Register</h2>
-        <form action="RegisterServlet" method="post">
+        <form action="register" method="post">
             <label for="name">Full Name:</label>
             <input type="text" name="name" required/>
-
-            <label for="username">Username:</label>
-            <input type="text" name="username" required/>
 
             <label for="email">Email:</label>
             <input type="email" name="email" required/>
@@ -75,6 +72,9 @@
 
             <input type="submit" value="Register"/>
         </form>
+        
+        <a href="login">Login Here</a>
+        
     </div>
 </body>
 </html>

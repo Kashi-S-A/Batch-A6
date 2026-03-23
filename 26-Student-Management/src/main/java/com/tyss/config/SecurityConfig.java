@@ -28,7 +28,7 @@ public class SecurityConfig {
 					.loginPage("/login")//GET
 					.loginProcessingUrl("/auth")//POST
 					.defaultSuccessUrl("/dashboard")
-					.failureUrl("/login?error=Invalid credentials")
+					.failureUrl("/login?msg=Invalid credentials")
 					.permitAll()
 			)
 			.logout(l -> l.logoutUrl("/logout").permitAll());

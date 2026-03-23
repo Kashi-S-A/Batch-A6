@@ -63,13 +63,13 @@
     </div>
 
     <div class="modal-body">
-        <form>
+        <form action="add-course" method="post">
 
             <label>Course Name:</label>
-            <input type="text" placeholder="Enter course name">
+            <input type="text" name="name" placeholder="Enter course name">
 
             <label>Duration:</label>
-            <input type="text" placeholder="e.g., 3 Months">
+            <input type="text" name="duration" placeholder="e.g., 3 Months">
 
             <button class="btn">Save Course</button>
 
